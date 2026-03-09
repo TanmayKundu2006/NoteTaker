@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Note</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white">
+    <div class="container mx-auto p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold">Edit Note</h1>
+            <a href="/" class="text-blue-400 hover:text-blue-300 transition-colors mt-2 inline-block">Back to Notes</a>
+        </header>
+        <main class="max-w-2xl mx-auto">
+            <div class="bg-zinc-800 p-6 rounded-lg shadow-lg mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Rename Note</h2>
+                <form action="/edit" method="POST">
+                    <input type="hidden" name="PREVIOUS" value="<%= filename %>">
+                    <div class="mb-4">
+                        <label for="new-title" class="block text-sm font-medium mb-2">New Title</label>
+                        <input type="text" id="new-title" name="NEW" placeholder="Enter new title" class="w-full bg-zinc-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md transition duration-300">Rename</button>
+                </form>
+            </div>
+            <div class="bg-zinc-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4">Edit Content</h2>
+                <form action="/update" method="POST">
+                    <input type="hidden" name="filename" value="<%= filename %>">
+                    <div class="mb-4">
+                        <label for="details" class="block text-sm font-medium mb-2">Content</label>
+                        <textarea id="details" name="details" rows="10" class="w-full bg-zinc-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required><%= filedata %></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition duration-300">Update Content</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

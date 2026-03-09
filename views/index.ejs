@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 text-white">
+    <div class="container mx-auto p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold">Note Taker</h1>
+        </header>
+        <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="md:col-span-1">
+                <h2 class="text-2xl font-semibold mb-4">Create a New Note</h2>
+                <form action="/create" method="POST" class="bg-zinc-800 p-6 rounded-lg shadow-lg">
+                    <div class="mb-4">
+                        <label for="title" class="block text-sm font-medium mb-2">Title</label>
+                        <input type="text" id="title" name="title" placeholder="Enter note title" class="w-full bg-zinc-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="details" class="block text-sm font-medium mb-2">Content</label>
+                        <textarea id="details" name="details" placeholder="Enter note content" rows="5" class="w-full bg-zinc-700 text-white p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md transition duration-300">Create Note</button>
+                </form>
+            </div>
+            <div class="md:col-span-2">
+                <h2 class="text-2xl font-semibold mb-4">Your Notes</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <% if (files.length > 0) { %>
+                        <% files.forEach(function(file) { %>
+                            <div class="bg-zinc-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <h3 class="text-xl font-semibold mb-3"><%= file.replace('.txt', '') %></h3>
+                                <div class="flex justify-between items-center">
+                                    <a href="/file/<%= file %>" class="text-blue-400 hover:text-blue-300 transition-colors">Read</a>
+                                    <a href="/edit/<%= file %>" class="text-green-400 hover:text-green-300 transition-colors">Edit</a>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="text-zinc-400">No notes yet. Create one to get started!</p>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
